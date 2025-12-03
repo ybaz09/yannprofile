@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yann Yiwénet Bazié — Portfolio (v2)</title>
+<meta name="description" content="Portfolio — Yann Yiwénet Bazié. Economiste du développement, expert data, suivi-évaluation. CV, diplômes, projets et contact."/>
+<style>
+/* BASE (style fidèle à yann 4.html, peaufiné pour lisibilité) */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1a5490; --primary-2:#2980b9; --secondary:#f39c12;
+  --dark:#2c3e50; --light:#f7f9fb; --card:#ffffff; --muted:#6b7a8a;
+  --text:#2c3e50;
+}
+body{font-family:"Segoe UI", Tahoma, Arial, sans-serif;background:var(--light);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:18px}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-2));padding:28px 0;color:#fff;position:relative}
+.header-inner{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center}
+.avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;border:6px solid rgba(255,255,255,0.12);box-shadow:0 12px 30px rgba(0,0,0,0.25)}
+.h1{font-size:28px;font-weight:800}
+.subtitle{opacity:0.95;margin-top:6px}
+.contact-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.kpi{background:var(--card);padding:12px;border-radius:10px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.kpi .num{font-size:20px;color:var(--primary);font-weight:800}
+.kpi .label{color:var(--muted);font-weight:700;margin-top:6px}
+
+/* navigation */
+nav{background:var(--dark);position:sticky;top:0;z-index:80;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:10px 18px;display:flex;justify-content:center;gap:14px}
+nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:8px;font-weight:700}
+nav a:hover{background:var(--primary)}
+
+/* layout */
+section{padding:36px 0}
+h2{text-align:center;color:var(--primary);margin-bottom:16px;font-size:22px}
+.grid-2{display:grid;grid-template-columns:1fr 360px;gap:20px}
+.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.muted{color:var(--muted)}
+
+/* timeline: left dates, right content */
+.timeline{display:flex;flex-direction:column;gap:12px}
+.timeline-item{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;background:var(--card);padding:12px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.timeline-item .date{font-weight:800;color:var(--secondary)}
+.timeline-item .pos-title{font-weight:800;color:var(--primary);margin-bottom:6px}
+.timeline-item p{margin:0;color:var(--text)}
+
+/* projects: project cards (one-line visible + details collapse) */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.project{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.08);transition:transform .18s}
+.project:hover{transform:translateY(-6px)}
+.project .head{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:12px 14px}
+.project .head h3{font-size:15px;margin-bottom:4px}
+.project .head small{opacity:0.95}
+.project .body{padding:12px 14px}
+.project .one-liner{font-weight:800;color:var(--text);margin-bottom:8px}
+.project .summary{color:var(--text);margin-bottom:8px;display:none}
+.project .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tag{background:var(--light);color:var(--primary);padding:6px 10px;border-radius:14px;font-weight:700;font-size:13px}
+
+/* diplomas & certifs */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.edu{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.05)}
+
+/* contact form */
+form.contact{display:flex;flex-direction:column;gap:10px}
+input,textarea{padding:10px;border-radius:8px;border:1px solid #e9e9e9;font-size:15px}
+textarea{min-height:140px;resize:vertical}
+.btn{background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;border:0;font-weight:800;cursor:pointer}
+
+/* small screens */
+@media(max-width:980px){.header-inner{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} .timeline-item{grid-template-columns:1fr}}
+@media(max-width:600px){ .kpis{grid-template-columns:1fr} .cards-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container header-inner">
+    <img class="avatar" src="yann.png" alt="Yann Bazié">
+    <div>
+      <div class="h1">YANN YIWÉNET BAZIÉ</div>
+      <div class="subtitle">Consultant Sénior en Économie du Développement - Gestion de Projets internationnaux  • Data • Suivi-Évaluation</div>
+
+      <div class="contact-row">
+        <div>Abidjan, Côte d'Ivoire</div>
+        <div><a href="mailto:ybaz09@gmail.com" style="color:#fff;text-decoration:underline">ybaz09@gmail.com</a></div>
+        <div>+225 07 48 55 55 31</div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <div class="kpis" role="region" aria-label="Chiffres clés">
+          <div class="kpi"><div class="num">30+</div><div class="label">Missions réalisées</div></div>
+          <div class="kpi"><div class="num">6</div><div class="label">Pays d'intervention</div></div>
+          <div class="kpi"><div class="num">150+</div><div class="label">Personnes formées</div></div>
+          <div class="kpi"><div class="num">23</div><div class="label">Sites supervisés (PEPFAR)</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <a href="/mnt/data/CV BAZIE YANN Y.docx" download style="background:#fff;color:var(--primary);padding:8px 12px;border-radius:8px;font-weight:700;text-decoration:none">Télécharger le CV</a>
+        &nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner container">
+    <a href="#profil">Profil</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#projects">Projets</a>
+    <a href="#diplomes">Diplômes & Certifs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- PROFIL -->
+  <section id="profil">
+    <h2>Profil professionnel</h2>
+    <div class="card">
+      <p style="text-align:justify;line-height:1.7">
+        Fort de plus de huit années d’expérience en économie du développement, suivi-évaluation et gestion de projets internationaux, j’ai conduit des missions stratégiques dans des secteurs clés tels que l’agriculture, la digitalisation, la santé, l’éducation et l’inclusion sociale. Mon approche repose sur la rigueur méthodologique, l’analyse de données et la coordination multi-acteurs pour transformer les résultats en décisions opérationnelles.
+      </p>
+      <p style="text-align:justify;margin-top:10px;line-height:1.7">
+        À travers ces projets, j’ai contribué à renforcer la résilience des systèmes alimentaires, à promouvoir l’économie numérique, à améliorer l’accès aux services sociaux et à développer des solutions innovantes pour l’insertion professionnelle des jeunes et des populations vulnérables. Ce portfolio illustre la diversité et l’impact de mes interventions, organisées par thématiques pour refléter la cohérence de mon expertise et la valeur ajoutée apportée à chaque mission.
+      </p>
+    </div>
+  </section>
+
+  <!-- PARCOURS (timeline improved: date column + Harvard verbs + compact) -->
+  <section id="parcours">
+    <h2>Parcours professionnel</h2>
+    <div class="timeline">
+    <div class="timeline-item">
+        <div class="date">Depuis 2022</div>
+        <div>
+          <div class="pos-title">Research Manager — CRIHD (Abidjan)</div>
+          <p><strong>je conçois</strong> et <strong>pilote</strong> cycles de recherche et  d’évaluation (baselines, évaluations) ; <strong>supervise</strong> équipes d’analystes et terrain ; <strong>implémente</strong> QA réduisant erreurs &lt;5%</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">Oct. 2023-2024</div>
+        <div>
+          <div class="pos-title">Sénior Consultant — Économiste Data Analyste, Cabinet Marabu</div>
+          <p><strong>J'ai dirigé</strong> des analyses économiques et statistiques ; <strong>organisé</strong> ateliers techniques et <strong>rédigé</strong> rapports d’expertise pour orienter des décisions stratégiques.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">Depuis oct. 2021</div>
+        <div>
+          <div class="pos-title">Consultant Indépendant — Accompagnement des PME</div>
+          <p><strong>J'élabore</strong> business plans et budgets ; <strong>développe</strong> plans S&E et <strong>conseille</strong> entrepreneurs sur structuration et stratégie.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">Juin–Sept. 2021</div>
+        <div>
+          <div class="pos-title">Consultant — Chargé S&E, Cabinet Sejen / Projet SAE</div>
+          <p><strong>j'ai Coordonné</strong> l'etude diagnostique du SAE du cabinet du Ministère du Budget ; <strong>collecté</strong>, <strong>analysé</strong> données et <strong>produit</strong> rapports de performance.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">2019–2021</div>
+        <div>
+          <div class="pos-title">Consultant Data Analyst — PEPFAR / MCC (DCLI)</div>
+          <p><strong>J'ai supervisé</strong> 23 sites prioritaires ; <strong>formé</strong> +100 agents ; <strong>accompagné</strong> 10 projets data science pour améliorer la prise en charge VIH.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">Juil.–Sept. 2019</div>
+        <div>
+          <div class="pos-title">Junior Économiste Chargé d'Études — Arus Advisors</div>
+          <p><strong>J'ai rédigé</strong> analyses sectorielles et business plans ; <strong>conseillé</strong> projets d’énergies propres.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="date">Oct. 2018 – Juin 2019</div>
+        <div>
+          <div class="pos-title">Junior Consultant — Projet « Des Chiffres et des Jeunes » (MENET)</div>
+          <p><strong>J'ai conçu</strong> outils Kobo ; <strong>mené</strong> enquêtes terrain ; <strong>analysé</strong> bases de données scolaires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS BY THEME (project cards with one-line impact + reveal) -->
+  <section id="projects">
+    <h2>Projets & missions — par thématiques</h2>
+
+    <!-- I Agriculture -->
+    <h3 style="color:var(--primary);margin-top:18px">I. Agriculture & Sécurité Alimentaire</h3>
+    <div class="cards-grid" style="margin-top:12px">
+      <!-- CARE PRESACI -->
+      <div class="project">
+        <div class="head"><h3>CARE International — PRESACI</h3><small>Coordonnateur (2025)</small></div>
+        <div class="body">
+          <div class="one-liner">contribution à la méthodologie & supervision collecte pour systèmes alimentaires durables.</div>
+          <div class="summary">Dans le cadre du projet PRESACI, j’ai piloté la conception méthodologique et supervisé la collecte des données sur les systèmes alimentaires durables en Côte d’Ivoire. Mon travail a permis de garantir la qualité et la fiabilité des analyses, offrant à CARE International des indicateurs clés pour orienter ses décisions stratégiques en matière d’agriculture résiliente.</div>
+          <div class="tags"><span class="tag">Agriculture</span><span class="tag">Systèmes alimentaires</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- AVAL -->
+      <div class="project">
+        <div class="head"><h3>Union Européenne / PPI — AVAL</h3><small>Consultant Data Analyst (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Transposé et analysé données terrain; produit rapport décisionnel.</div>
+          <div class="summary">J’ai transposé, analysé et interprété les données qualitatives et quantitatives collectées sur le terrain, puis produit un rapport d’analyse exploitable pour orienter les décisions stratégiques du projet AVAL, contribuant à renforcer la sécurité alimentaire dans la région.</div>
+          <div class="tags"><span class="tag">Agriculture</span><span class="tag">Analyse</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- MasterCard / Caribou -->
+      <div class="project">
+        <div class="head"><h3>MasterCard Foundation & Caribou Digital — Agriculture sociale</h3><small>Chercheur associé (2025)</small></div>
+        <div class="body">
+          <div class="one-liner">Mené enquêtes et analysé leviers d'emplois durables.</div>
+          <div class="summary">J’ai mené des enquêtes auprès d’acteurs agricoles et analysé les données pour identifier les leviers de création d’emplois durables. Les résultats ont permis de formuler des recommandations pour renforcer l’agriculture sociale et favoriser l’inclusion économique des jeunes dans l’espace UEMOA.</div>
+          <div class="tags"><span class="tag">Emploi</span><span class="tag">Inclusion</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- Identification opportunités -->
+      <div class="project">
+        <div class="head"><h3>Identification opportunités d’emploi — Jeunes</h3><small>Chef de projet / Associate Researcher (2025)</small></div>
+        <div class="body">
+          <div class="one-liner">Élaboré protocole, dirigé enquêtes, utilisé IA pour analyses qualitatives.</div>
+          <div class="summary">J’ai élaboré le protocole de recherche et la méthodologie, dirigé les enquêtes et réalisé les premières analyses à l’aide d’un outil d’IA pour l’analyse qualitative. Mission axée sur coton, horticulture, logistique et services digitaux pour identifier chaînes de valeur porteuses.</div>
+          <div class="tags"><span class="tag">Value chains</span><span class="tag">Jeunesse</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- II Digital -->
+    <h3 style="color:var(--primary);margin-top:20px">II. Digitalisation & Économie numérique</h3>
+    <div class="cards-grid" style="margin-top:12px">
+      <!-- Paradigm -->
+      <div class="project">
+        <div class="head"><h3>Paradigm Initiative — Inclusion numérique</h3><small>Consultant National (2025)</small></div>
+        <div class="body">
+          <div class="one-liner">Conduit revue et analyse nationale pour rapport régional.</div>
+          <div class="summary">J’ai conduit une analyse approfondie des données nationales sur l’inclusion numérique, combinant revue documentaire et collecte terrain. Cette étude a permis de mettre en lumière les écarts d’investissement dans la digitalisation des services et d’alimenter le rapport régional.</div>
+          <div class="tags"><span class="tag">Digital</span><span class="tag">Inclusion</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- Ecommerce -->
+      <div class="project">
+        <div class="head"><h3>Atelier — E-commerce CI</h3><small>Chef secrétariat technique & Rapporteur (2023)</small></div>
+        <div class="body">
+          <div class="one-liner">Produit Livre blanc et feuille de route nationale.</div>
+          <div class="summary">J’ai produit le rapport et un Livre blanc présentant la feuille de route nationale sur le commerce électronique en Côte d’Ivoire, structurant orientations pour le développement du secteur.</div>
+          <div class="tags"><span class="tag">E-commerce</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- VTC -->
+      <div class="project">
+        <div class="head"><h3>Ateliers VTC — Régulation & protection sociale</h3><small>Chef secrétariat technique & Rapporteur (2023–2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Co-produit Livre blanc (Deloitte/EY) ; défini mécanismes d'inclusion.</div>
+          <div class="summary">J’ai co-produit un Livre blanc sectoriel et organisé des ateliers visant à définir des solutions de régulation et d’inclusion sociale pour les chauffeurs VTC.</div>
+          <div class="tags"><span class="tag">VTC</span><span class="tag">Protection sociale</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- GUCE -->
+      <div class="project">
+        <div class="head"><h3>GUCE — Étude diagnostique</h3><small>Chef de projet / Expert économiste (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Conçu outils et diagnostic consolidé pour le Guichet Unique.</div>
+          <div class="summary">J’ai élaboré les documents techniques, implémenté les outils de collecte et rédigé le rapport consolidé de diagnostic permettant d’orienter des réformes pour fluidifier les opérations portuaires.</div>
+          <div class="tags"><span class="tag">Logistique</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- III Health & Inclusion -->
+    <h3 style="color:var(--primary);margin-top:20px">III. Santé, Nutrition & Inclusion sociale</h3>
+    <div class="cards-grid" style="margin-top:12px">
+      <!-- UNICEF/OMS -->
+      <div class="project">
+        <div class="head"><h3>UNICEF / OMS — Nutrition & Power BI</h3><small>Co-formateur (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Coordoné et Animé formation Power BI pour données nutrition.</div>
+          <div class="summary">J’ai coordonné et co-animé l’atelier sur le traitement et la visualisation des données nutritionnelles via Power BI, renforçant les compétences analytiques des équipes.</div>
+          <div class="tags"><span class="tag">Nutrition</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- Ministry trainings -->
+      <div class="project">
+        <div class="head"><h3>Ministère de la Santé — Formations S&E</h3><small>Formateur (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Formé +20 cadres sur Power BI, Excel & KoboToolbox.</div>
+          <div class="summary">J’ai co-animé deux modules de formation sur le suivi-évaluation et l’analyse de données, formant plus de 20 cadres techniques aux outils analytiques et de collecte digitale.</div>
+          <div class="tags"><span class="tag">S&E</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- PEPFAR DCLI -->
+      <div class="project">
+        <div class="head"><h3>PEPFAR / MCC — DCLI</h3><small>Consultant chargé de suivi et de l'appui technique (2020)</small></div>
+        <div class="body">
+          <div class="one-liner">Formé 100 agents ; appui 10 projets data science pour VIH.</div>
+          <div class="summary">J’ai formé 100 agents d’ONG aux statistiques, SQL et Tableau et suivi 10 projets en data science visant à améliorer la prise en charge des patients VIH.</div>
+          <div class="tags"><span class="tag">Santé</span><span class="tag">Data</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- MasterCard — inclusion -->
+      <div class="project">
+        <div class="head"><h3>MasterCard Foundation / ITAD — Inclusion jeunes vulnérables</h3><small>Coordonnateur national / Expert quant. (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Supervisé terrain et analysé inclusion professionnelle pour jeunes vulnérables.</div>
+          <div class="summary">J’ai supervisé les activités terrain et mené l’analyse quantitative pour évaluer l’inclusion professionnelle des jeunes réfugiés et personnes handicapées, fournissant recommandations pour accroître l’accès à l’emploi.</div>
+          <div class="tags"><span class="tag">Inclusion</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+
+      <!-- CBM -->
+      <div class="project">
+        <div class="head"><h3>CBM — Évaluation finale</h3><small>Expert en évaluation (2024)</small></div>
+        <div class="body">
+          <div class="one-liner">Évalué projet d’accès à la formation pro. — recommandations opérationnelles.</div>
+          <div class="summary">J’ai contribué à l’évaluation finale selon les critères OCDE/CAD, mesuré indicateurs de performance et formulé recommandations pour la pérennisation des acquis.</div>
+          <div class="tags"><span class="tag">Évaluation</span></div>
+          <button class="btn-toggle btn" type="button" data-target>Voir plus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- IV Education -->
+    <h3 style="color:var(--primary);margin-top:20px">IV. Éducation & Renforcement de capacités</h3>
+    <div class="cards-grid" style="margin-top:12px">
+      <div class="project"><div class="head"><h3>TaRL — Baseline (Bagoué)</h3><small>Coordonnateur terrain (2023)</small></div><div class="body"><div class="one-liner">Supervisé QA & collecte ; contribué rapport d'évaluation.</div><div class="summary">J'ai supervisé des équipes terrain, le contrôle qualité des données et contribué au rapport final permettant le déploiement du programme d’enseignement ciblé.</div><div class="tags"><span class="tag">Éducation</span></div><button class="btn-toggle btn">Voir plus</button></div></div>
+
+      <div class="project"><div class="head"><h3>Des Chiffres et des Jeunes — MENET-FP</h3><small>Chef d’équipe (2019)</small></div><div class="body"><div class="one-liner">Coordonné collecte DREN ; formé agents Kobo.</div><div class="summary">j'ai Coordonné la collecte auprès des DREN et formation de neuf agents à KoboToolbox pour améliorer la qualité des données éducatives.</div><div class="tags"><span class="tag">Education</span></div><button class="btn-toggle btn">Voir plus</button></div></div>
+
+      <div class="project"><div class="head"><h3>CRIHD — Formation & insertion jeunes diplômés</h3><small>Chargé de programme (2022)</small></div><div class="body"><div class="one-liner">Conçu & géré formation — 90% d’insertion en 4 mois.</div><div class="summary">J'ai concu et géré le projet de formation pour 33 jeunes diplômés avec un taux d’insertion de 90% en 4 mois.</div><div class="tags"><span class="tag">Insertion</span></div><button class="btn-toggle btn">Voir plus</button></div></div>
+
+      <div class="project"><div class="head"><h3>JPOIR — Étude satisfaction</h3><small>Coordonnateur (2019/2021)</small></div><div class="body"><div class="one-liner">Dirigé enquête et produit rapport statistique.</div><div class="summary">J'ai dirrigé une équipe de 12 enquêteurs, superviser la collecte et co-produit un rapport statistique pour améliorer l’organisation des événements institutionnels.</div><div class="tags"><span class="tag">Étude</span></div><button class="btn-toggle btn">Voir plus</button></div></div>
+    </div>
+
+    <!-- V Energy -->
+    <h3 style="color:var(--primary);margin-top:20px">V. Énergie & Infrastructures</h3>
+    <div class="cards-grid" style="margin-top:12px">
+      <div class="project"><div class="head"><h3>CEDEAO / BNETD — PRODEL</h3><small>Coordonnateur étude (2024)</small></div><div class="body"><div class="one-liner">Rédigé proposition & coordonné faisabilité pour électrification 20k localités.</div><div class="summary">Rédaction de l’offre technique/financière et coordination de l’étude technico-économique pour l’électrification d’environ 20,000 localités en Afrique de l’Ouest.</div><div class="tags"><span class="tag">Énergie</span></div><button class="btn-toggle btn">Voir plus</button></div></div>
+    </div>
+
+  </section>
+
+  <!-- DIPLOMES & CERTIFICATIONS -->
+  <section id="diplomes">
+    <h2>Diplômes & Certifications</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Diplômes</h3>
+        <div class="edu-grid" style="margin-top:10px">
+          <div class="edu"><strong>En cours — Doctorat en Économie du Développement</strong><div class="muted">Université Alassane Ouattara, spécialisation Évaluation d'Impact</div></div>
+          <div class="edu"><strong>2016 — Master en Économie du Développement</strong><div class="muted">Université Alassane Ouattara de Bouaké</div></div>
+          <div class="edu"><strong>2014 — Master en Économie Publique</strong><div class="muted">Université Méthodiste de Côte d'Ivoire</div></div>
+          <div class="edu"><strong>2013 — Licence en Économie Publique</strong><div class="muted">Université Nord d'Abidjan</div></div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Certifications & formations</h3>
+        <div style="margin-top:10px">
+          <div class="muted"><strong>2025</strong> — Bootcamp Data & IA (TBI for Global Change / GIZ / ESTDEV)</div>
+          <div class="muted" style="margin-top:6px"><strong>2022</strong> — Formation IA & Data Science — Africa Tech Up Tour</div>
+          <div class="muted" style="margin-top:6px"><strong>2020</strong> — Gestion de projet (PMI) — Cabinet APM</div>
+          <div class="muted" style="margin-top:6px"><strong>2018</strong> — Suivi & Évaluation — Chaire UNESCO</div>
+          <div class="muted" style="margin-top:6px"><strong>2024</strong> — Sécurité informatique & protection des données — PLCC/DITT</div>
+          <div class="muted" style="margin-top:6px"><strong>2020</strong> — SQL / DataViz / Tableau & anonymisation des données</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <form id="contactForm" class="contact" method="POST" action="https://formspree.io/f/mzzwzzob">
+        <input type="text" id="hp" name="website" style="display:none" autocomplete="off" tabindex="-1">
+        <label style="font-weight:800">Nom & Prénoms *</label>
+        <input name="Nom" type="text" required placeholder="Votre nom complet">
+        <label style="font-weight:800">Structure / Organisation</label>
+        <input name="Structure" type="text" placeholder="Organisation">
+        <label style="font-weight:800">Fonction</label>
+        <input name="Fonction" type="text" placeholder="Fonction">
+        <label style="font-weight:800">Email *</label>
+        <input name="Email" type="email" required placeholder="votre@email.com">
+        <label style="font-weight:800">Message *</label>
+        <textarea name="Message" required placeholder="Votre message..."></textarea>
+
+        <input type="hidden" name="_subject" value="Nouveau message — Portfolio Yann Bazié">
+        <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+          <button class="btn" type="submit">Envoyer</button>
+          <div id="form-status" style="font-weight:800;color:var(--primary)"></div>
+        </div>
+      </form>
+      <p class="muted" style="margin-top:10px">Formulaire sécurisé via Formspree — endpoint : <strong>mzzwzzob</strong>. Vérifie la validation de ton email si nécessaire.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer style="margin-top:26px;background:var(--dark);color:#fff;padding:18px 0;text-align:center">
+  <div class="container">
+    <p>&copy; 2025 Yann Yiwénet Bazié — Abidjan, Côte d'Ivoire — <a href="mailto:ybaz09@gmail.com" style="color:#fff;text-decoration:underline">ybaz09@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+/* Toggle project details: show one-liner and toggle .summary visibility */
+document.querySelectorAll('.btn-toggle').forEach(btn=>{
+  btn.addEventListener('click', function(){
+    const body = this.parentElement;
+    const summary = body.querySelector('.summary');
+    if(!summary) return;
+    const isVisible = summary.style.display === 'block';
+    summary.style.display = isVisible ? 'none' : 'block';
+    this.textContent = isVisible ? 'Voir plus' : 'Voir moins';
+    if(!isVisible) {
+      // smooth scroll small
+      setTimeout(()=> body.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+    }
+  });
+});
+
+/* Formspree AJAX + honeypot */
+document.getElementById('contactForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const hp = document.getElementById('hp');
+  const status = document.getElementById('form-status');
+  if(hp.value){ status.textContent='Spam détecté.'; status.style.color='red'; return; }
+  const form = e.target;
+  const data = new FormData(form);
+  try{
+    const res = await fetch(form.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' }});
+    if(res.ok){ status.textContent='Merci — message envoyé.'; status.style.color='#28a745'; form.reset(); }
+    else { const json = await res.json(); status.textContent = json.error || 'Erreur : envoi impossible.'; status.style.color='red'; }
+  }catch(err){ status.textContent='Erreur réseau.'; status.style.color='red'; }
+});
+</script>
+
+</body>
+</html>
